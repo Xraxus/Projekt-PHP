@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220525102050 extends AbstractMigration
+final class Version20220608065825 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,14 +20,14 @@ final class Version20220525102050 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE categories CHANGE slug slug VARCHAR(64) NOT NULL');
-        $this->addSql('ALTER TABLE tasks CHANGE category_id category_id INT NOT NULL');
+        $this->addSql('CREATE TABLE users (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE INDEX email_idx (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE categories CHANGE slug slug VARCHAR(64) NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('DROP TABLE users');
         $this->addSql('ALTER TABLE categories CHANGE slug slug VARCHAR(64) DEFAULT NULL');
-        $this->addSql('ALTER TABLE tasks CHANGE category_id category_id INT DEFAULT NULL');
     }
 }
